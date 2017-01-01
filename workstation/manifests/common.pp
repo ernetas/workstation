@@ -111,7 +111,6 @@ class workstation::common {
     'bzip2',
     'rfkill',
     'pm-utils',
-    'psmouse-elantech'
   ]
   package { $packages:
     ensure   =>  installed,
