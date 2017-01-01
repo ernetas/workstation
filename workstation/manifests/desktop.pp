@@ -4,6 +4,7 @@ class workstation::desktop {
   $packages = [
     'fluxbox',
     'xterm',
+    'insync',
     'abiword',
     'libreoffice-fresh',
     'keepassx2',
