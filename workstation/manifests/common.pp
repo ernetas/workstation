@@ -118,6 +118,6 @@ class workstation::common {
     provider =>  'pacman'
   }
   Package {
-    require   =>  Exec['pacman update']
+    require   =>  [ Exec['pacman update'], File['/etc/pacman.conf'], File['/etc/pacman.d/mirrorlist'] ]
   }
 }
