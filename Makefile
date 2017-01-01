@@ -3,4 +3,4 @@
 all: apply
 
 apply:
-	puppet apply site.pp --modulepath ./
+	sudo puppet apply site.pp --modulepath ./

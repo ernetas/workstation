@@ -1,4 +1,17 @@
 class workstation::common {
+  file { '/etc/pacman.d/mirrorlist':
+    source  =>  'puppet:///modules/workstation/etc-pacman_d-mirrorlist',
+    notify  =>  Exec['pacman update']
+  }
+  file { '/etc/pacman.conf':
+    source  =>  'puppet:///modules/workstation/etc-pacman_conf',
+    notify  =>  Exec['pacman update']
+  }
+  exec { 'pacman update':
+    command =>  '/usr/bin/pacman -Syu --noconfirm --noprogressbar --force',
+    user    =>  'root',
+    refreshonly => true
+  }
   $packages = [
     'autoconf',
     'automake',
@@ -103,5 +116,8 @@ class workstation::common {
   package { $packages:
     ensure   =>  installed,
     provider =>  'pacman'
+  }
+  Package {
+    require   =>  Exec['pacman update']
   }
 }
