@@ -1,0 +1,11 @@
+min_peers = 100
+max_peers = 1000
+min_peers_seed = -1
+max_peers_seed = -1
+max_uploads = 100
+directory = /var/backups/dw/
+session = /var/backups/dw/session
+encryption = allow_incoming,enable_retry,try_outgoing
+dht = auto
+peer_exchange = yes
+

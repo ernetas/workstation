@@ -1,4 +1,35 @@
 class workstation::common {
+  file { '/etc/systemd/system/docker.service':
+    before =>  Service['docker'],
+    source  =>  'puppet:///modules/workstation/etc-systemd-system-docker_service',
+    owner   =>  'root',
+    group   =>  'root',
+    mode    =>  '644',
+    notify  =>  Service['docker']
+  }
+  service { 'docker':
+    require =>  Package['docker'],
+    ensure  =>  running,
+    enable  =>  true
+  }
+  file { '/home/ernestas/.rtorrent.rc':
+    source  =>  'puppet:///modules/workstation/home-ernestas-_rtorrent_rc',
+    owner   =>  'ernestas',
+    group   =>  'ernestas',
+    mode    =>  '644'
+  }
+  user { 'ernestas':
+    shell      =>  '/bin/bash',
+    allowdupe  =>  no,
+    managehome =>  true,
+  }
+  file { "/etc/sudoers.d/ernestas":
+    mode    =>  '440',
+    owner   =>  'root',
+    group   =>  'root',
+    source  =>  'puppet:///modules/workstation/etc-sudoers_d-ernestas',
+  }
+
   exec { 'enable ntp':
     command  =>  '/usr/bin/timedatectl set-ntp true',
     onlyif   =>  '/usr/bin/timedatectl status | grep NTP | grep -q no'
