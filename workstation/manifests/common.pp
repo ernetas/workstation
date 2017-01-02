@@ -107,6 +107,7 @@ class workstation::common {
     'sudo',
     'texinfo',
     'util-linux',
+    'maven',
     'which',
     'htop',
     'iotop',
