@@ -45,7 +45,7 @@ class workstation::desktop {
     'udisks2',
     'vagrant',
     'xf86-video-intel',
-    'pango',
+    'pango-ubuntu',
     'youtube-dl',
     'wireshark-gtk',
     'gstreamer0.10-bad',
