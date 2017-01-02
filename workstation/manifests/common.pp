@@ -1,4 +1,8 @@
 class workstation::common {
+  exec { 'enable ntp':
+    command  =>  '/usr/bin/timedatectl set-ntp true',
+    onlyif   =>  '/usr/bin/timedatectl status | grep NTP | grep -q no'
+  }
   file { '/etc/pacman.d/mirrorlist':
     source  =>  'puppet:///modules/workstation/etc-pacman_d-mirrorlist',
     notify  =>  Exec['pacman update']
