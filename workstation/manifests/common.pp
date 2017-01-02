@@ -102,6 +102,7 @@ class workstation::common {
     'gzip',
     'libtool',
     'make',
+    'gradle',
     'pkg-config',
     'sudo',
     'texinfo',
