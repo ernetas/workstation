@@ -12,6 +12,19 @@ class workstation::common {
     ensure  =>  running,
     enable  =>  true
   }
+  file { '/etc/systemd/system/rtorrent.service':
+    before =>  Service['rtorrent'],
+    source  =>  'puppet:///modules/workstation/etc-systemd-system-rtorrent_service',
+    owner   =>  'root',
+    group   =>  'root',
+    mode    =>  '644',
+    notify  =>  Service['rtorrent']
+  }
+  service { 'rtorrent':
+    require =>  [ Package['rtorrent'], Package['screen'] ],
+    ensure  =>  running,
+    enable  =>  true
+  }
   file { '/home/ernestas/.rtorrent.rc':
     source  =>  'puppet:///modules/workstation/home-ernestas-_rtorrent_rc',
     owner   =>  'ernestas',
