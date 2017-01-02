@@ -4,7 +4,8 @@ class workstation::desktop {
       ensure  =>  link,
       target  =>  '/var/backups/dw',
       owner   =>  'ernestas',
-      group   =>  'ernestas'
+      group   =>  'ernestas',
+      before  =>  File['/home/ernestas/dw/session']
     }
   }
   include '::workstation::dvd'

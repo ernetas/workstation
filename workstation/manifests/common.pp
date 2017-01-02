@@ -7,6 +7,12 @@ class workstation::common {
     mode    =>  '644',
     notify  =>  Service['docker']
   }
+  file { '/home/ernestas/dw/session':
+    ensure  =>  directory,
+    owner   =>  'ernestas',
+    group   =>  'ernestas',
+    mode    =>  '755'
+  }
   service { 'docker':
     require =>  Package['docker'],
     ensure  =>  running,
