@@ -1,13 +1,4 @@
 class workstation::desktop {
-  if $hostname == 'jupiter' {
-    file { '/home/ernestas/dw':
-      ensure  =>  link,
-      target  =>  '/var/backups/dw',
-      owner   =>  'ernestas',
-      group   =>  'ernestas',
-      before  =>  File['/home/ernestas/dw/session']
-    }
-  }
   include '::workstation::dvd'
   include '::workstation::media'
   $packages = [

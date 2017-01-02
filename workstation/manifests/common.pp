@@ -1,4 +1,26 @@
 class workstation::common {
+  case $hostname {
+    'jupiter':  { $link = '/var/backups/dw' }
+    'mercury':  { $link = '/home/ernestas/.disk/dw' }
+    default:    { $link = '/home/ernestas/dw' }
+  }
+  if $link == '/home/ernestas/dw' {
+    file { '/home/ernestas/dw':
+      ensure  =>  directory,
+      mode    =>  '755',
+      owner   =>  'ernestas',
+      group   =>  'ernestas',
+      before  =>  File['/home/ernestas/dw/session']
+    }
+  } else {
+    file { '/home/ernestas/dw':
+      ensure  =>  link,
+      target  =>  $link,
+      owner   =>  'ernestas',
+      group   =>  'ernestas',
+      before  =>  File['/home/ernestas/dw/session']
+    }
+  } 
   file { '/etc/systemd/system/docker.service':
     before =>  Service['docker'],
     source  =>  'puppet:///modules/workstation/etc-systemd-system-docker_service',
@@ -11,7 +33,8 @@ class workstation::common {
     ensure  =>  directory,
     owner   =>  'ernestas',
     group   =>  'ernestas',
-    mode    =>  '755'
+    mode    =>  '755',
+    require =>  File['/home/ernestas/dw']
   }
   service { 'docker':
     require =>  Package['docker'],
