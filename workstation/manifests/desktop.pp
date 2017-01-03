@@ -45,7 +45,6 @@ class workstation::desktop {
     'udisks2',
     'vagrant',
     'xf86-video-intel',
-    'pango-ubuntu',
     'youtube-dl',
     'wireshark-gtk',
     'gstreamer0.10-bad',
@@ -73,10 +72,9 @@ class workstation::desktop {
     'sysfsutils',
     'numlockx',
     'xorg-xauth',
-    
-
   ]
   package { $packages:
-    ensure  =>  installed
+    ensure   =>  installed,
+    provider =>  'pacman'
   }
 }
