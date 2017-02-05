@@ -1,6 +1,22 @@
 class workstation::desktop {
   include '::workstation::dvd'
   include '::workstation::media'
+  $removed_packages = [
+    'ffmpeg0.10',
+    'gstreamer0.10-bad',
+    'gstreamer0.10-bad-plugins',
+    'gstreamer0.10-base',
+    'gstreamer0.10-base-plugins',
+    'gstreamer0.10-good',
+    'gstreamer0.10-good-plugins',
+    'gstreamer0.10-ugly',
+    'gstreamer0.10-ugly-plugins',
+    'farstream-0.1',
+    'wxgtk2.8',
+    'moodbar',
+    'gstreamer0.10-python',
+    'gstreamer0.10-ffmpeg',     
+  ]
   $packages = [
     'fluxbox',
     'xterm',
@@ -47,8 +63,6 @@ class workstation::desktop {
     'xf86-video-intel',
     'youtube-dl',
     'wireshark-gtk',
-    'gstreamer0.10-bad',
-    'gstreamer0.10-bad-plugins',
     'filezilla',
     'baobab',
     'feh',
@@ -57,8 +71,6 @@ class workstation::desktop {
     'cups',
     'mono',
     'transmission-gtk',
-    'gstreamer0.10-good',
-    'gstreamer0.10-good-plugins',
     'putty',
     'aspell',
     'xorg-xinit',
@@ -75,6 +87,10 @@ class workstation::desktop {
   ]
   package { $packages:
     ensure   =>  installed,
+    provider =>  'pacman'
+  }
+  package { $removed_packages:
+    ensure   =>  absent,
     provider =>  'pacman'
   }
 }
