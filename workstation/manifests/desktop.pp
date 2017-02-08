@@ -34,7 +34,6 @@ class workstation::desktop {
     'thunderbird',
     'libreoffice-fresh-lt',
     'xlockmore',
-    'qbat',
     'gparted',
     'dropbox',
     'pulseaudio-bluetooth',
@@ -92,5 +91,10 @@ class workstation::desktop {
   package { $removed_packages:
     ensure   =>  absent,
     provider =>  'pacman'
+  }
+  if $hostname == 'pluto' {
+    package { 'qbat':
+      ensure  =>  installed
+    }
   }
 }
